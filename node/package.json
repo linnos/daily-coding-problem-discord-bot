@@ -1,0 +1,23 @@
+{
+  "name": "daily-coding-discord",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linnos/daily-coding-problem-discord-bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/linnos/daily-coding-problem-discord-bot/issues"
+  },
+  "homepage": "https://github.com/linnos/daily-coding-problem-discord-bot#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
