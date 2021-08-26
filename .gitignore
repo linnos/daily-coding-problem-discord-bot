@@ -106,3 +106,5 @@ dist
 # Credential/token files
 gmailcredentials.json
 token.json
+node/config.json
+node/events/
