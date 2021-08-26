@@ -30,6 +30,7 @@ app.listen(80, function(){
 const fs = require('fs');
 const readline = require('readline');
 const {google} = require('googleapis');
+const { stderr } = require('process');
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://mail.google.com/'];
@@ -38,12 +39,18 @@ const SCOPES = ['https://mail.google.com/'];
 // time.
 const TOKEN_PATH = 'token.json';
 
-// Load client secrets from a local file.
+const schedule = require('node-schedule');
+
+const job = schedule.scheduleJob('* 12 * * *', function(){
+  // Load client secrets from a local file.
 fs.readFile('gmailcredentials.json', (err, content) => {
   if (err) return console.log('Error loading client secret file:', err);
   // Authorize a client with credentials, then call the Gmail API.
-  authorize(JSON.parse(content), listLabels);
+  authorize(JSON.parse(content), displayEmail);
 });
+  console.log('The answer to life, the universe, and everything!');
+});
+
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -95,12 +102,14 @@ function getNewToken(oAuth2Client, callback) {
   });
 }
 
+let todaysCodingEmail = "";
+
 /**
  * Lists the labels in the user's account.
  *
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
-function listLabels(auth) {
+async function displayEmail(auth) {
   query = 'founders@dailycodingproblem.com';
   return new Promise((resolve, reject) => {    
     const gmail = google.gmail({version: 'v1', auth});
@@ -134,7 +143,7 @@ function getMail(msgId, auth){
   gmail.users.messages.get({
       userId:'me',
       id: msgId ,
-  }, (err, res) => {
+      }, (err, res) => {
       // console.log(res.data.payload.parts)
 
       if(!err){
@@ -146,8 +155,9 @@ function getMail(msgId, auth){
         // decode buffer as UTF-8
         const str = buff.toString('utf-8');
 
-        // print normal string
-        console.log(str.split("--------------------------------------------------------------------------------")[0]);
+        // set variable to store email, also prints normal string to log
+        todaysCodingEmail = str.split("--------------------------------------------------------------------------------")[0];
+        console.log(todaysCodingEmail);
       }
   });
 }
