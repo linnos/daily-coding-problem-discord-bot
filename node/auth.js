@@ -7,6 +7,7 @@ const { discord_token } = require('./config.json');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
+//
 client.on("message", (data) => {
 	if(data.content.includes('hello world') && data.author.username != client.user.username){
 		console.log(`${data.author.username}: (${data.content}) in the ${data.channel.name} channel.`);
@@ -22,10 +23,6 @@ client.on("message", (data) => {
 		var final_days_since = days_since.toFixed(0); // remove trailing 0s
 		data.reply(`It has been ${final_days_since} days since ${MARTIN_G} ran away from a 1v1 with ${ZACH_M}. Just thought you should know.`) // reply to the thing that triggered this event
 	}
-});
-
-client.once("message", (data) => {
-	
 });
 
 client.login(discord_token);
