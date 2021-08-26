@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/linnos/daily-coding-problem-discord-bot#readme",
   "dependencies": {
+    "discord.js": "^12.5.3",
     "express": "^4.17.1"
   }
 }
