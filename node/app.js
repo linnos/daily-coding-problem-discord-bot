@@ -41,7 +41,7 @@ const TOKEN_PATH = 'token.json';
 
 const schedule = require('node-schedule');
 
-const job = schedule.scheduleJob('* 12 * * *', function(){
+const job = schedule.scheduleJob('00 12 * * *', function(){
   // Load client secrets from a local file.
 fs.readFile('gmailcredentials.json', (err, content) => {
   if (err) return console.log('Error loading client secret file:', err);
@@ -50,7 +50,6 @@ fs.readFile('gmailcredentials.json', (err, content) => {
 });
   console.log('The answer to life, the universe, and everything!');
 });
-
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
